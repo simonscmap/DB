@@ -1,7 +1,6 @@
 USE [master]
 GO
 
-/****** Object:  Database [Opedia]    Script Date: 7/15/2019 3:01:55 PM ******/
 CREATE DATABASE [Opedia]
  CONTAINMENT = NONE
  ON  PRIMARY 
