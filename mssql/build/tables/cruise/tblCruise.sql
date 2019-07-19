@@ -11,7 +11,7 @@ CREATE TABLE [dbo].[tblCruise](
 	[ID] [int] IDENTITY(1,1) NOT NULL,
 	[Name] [nvarchar](20) NOT NULL,
 	[Nickname] [nvarchar](20) NULL,
-	[Ship_Name] [nvarchar](20) NULL,
+	[Ship_Name] [nvarchar](50) NULL,
 	[Keywords] [nchar](100) NULL,
  CONSTRAINT [PK_tblCruise] PRIMARY KEY CLUSTERED 
 (
@@ -19,6 +19,7 @@ CREATE TABLE [dbo].[tblCruise](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [FG1]
 ) ON [FG1]
 GO
+
 
 
 

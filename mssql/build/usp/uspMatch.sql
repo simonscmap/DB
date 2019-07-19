@@ -20,6 +20,15 @@ CREATE PROC [dbo].[uspMatch] @tblSource NVARCHAR(MAX), @fieldSource NVARCHAR(MAX
 --WITH RECOMPILE 
 AS
 BEGIN
+ 	DECLARE @dt1 NVARCHAR(MAX);
+	DECLARE @dt2 NVARCHAR(MAX);
+  	DECLARE @lat1 NVARCHAR(MAX); 
+	DECLARE @lat2 NVARCHAR(MAX); 
+	DECLARE @lon1 NVARCHAR(MAX);
+	DECLARE @lon2 NVARCHAR(MAX); 
+	DECLARE @depth1 NVARCHAR(MAX);
+	DECLARE @depth2 NVARCHAR(MAX);
+
 	SET @tblSource = RTRIM(LTRIM(@tblSource));
 	SET @fieldSource = RTRIM(LTRIM(@fieldSource));
 	SET @tblTarget = RTRIM(LTRIM(@tblTarget));
@@ -128,7 +137,9 @@ BEGIN
 	DECLARE @query AS NVARCHAR(MAX);
 	SET NOCOUNT ON;
 
-	SET @selectList = 'SELECT tbl1.[time], tbl1.[lat], tbl1.[lon]' + @sourceDepth + ', AVG(tbl1.[' + @fieldSource + ']) [' + @fieldSource +'], STDEV(tbl1.[' + @fieldSource + ']) [' + @fieldSource + '_std], AVG(tbl2.[' + @fieldTarget + ']) [' + @fieldTarget + '], STDEV(tbl2.[' + @fieldTarget + ']) [' + @fieldTarget + '_std] ';
+	SET @selectList = 'SELECT tbl1.[time], tbl1.[lat], tbl1.[lon]' + @sourceDepth +  ', AVG(tbl2.[' + @fieldTarget + ']) [' + @fieldTarget + '], STDEV(tbl2.[' + @fieldTarget + ']) [' + @fieldTarget + '_std] ';
+	IF LEN(@fieldSource) > 0
+		SET @selectList = 'SELECT tbl1.[time], tbl1.[lat], tbl1.[lon]' + @sourceDepth + ', AVG(tbl1.[' + @fieldSource + ']) [' + @fieldSource +'], STDEV(tbl1.[' + @fieldSource + ']) [' + @fieldSource + '_std], AVG(tbl2.[' + @fieldTarget + ']) [' + @fieldTarget + '], STDEV(tbl2.[' + @fieldTarget + ']) [' + @fieldTarget + '_std] ';
 	SET @fromList = ' FROM ' + @tblSource + ' [tbl1], ' + @tblTarget + ' [tbl2] '
 
 
