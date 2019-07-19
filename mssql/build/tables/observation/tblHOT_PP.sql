@@ -24,7 +24,7 @@ CREATE TABLE [dbo].[tblHOT_PP](
 	[synechococcus_hot] [float] NULL,
 	[eukaryotes_hot] [float] NULL,
 	[lat] [float] NOT NULL,
-	[lon] [float] NOT NULLs
+	[lon] [float] NOT NULL
 ) ON [PRIMARY]
 GO
 
