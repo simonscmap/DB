@@ -103,6 +103,11 @@ BEGIN
 --	DECLARE @targetDepthSelect AS NVARCHAR(MAX)	
 --	SET @targetDepthSelect = '';
 
+	DECLARE @sourceCruiseQuery AS NVARCHAR(MAX)
+	SET @sourceCruiseQuery = '';
+	IF LOWER(@tblSource) = 'tblcruise_trajectory'
+		SET @sourceCruiseQuery = ' AND tbl1.[Cruise_ID] = ' + @fieldSource;
+
 
 
 	IF @tblTarget LIKE '%_Climatology'			
@@ -137,9 +142,9 @@ BEGIN
 	DECLARE @query AS NVARCHAR(MAX);
 	SET NOCOUNT ON;
 
-	SET @selectList = 'SELECT tbl1.[time], tbl1.[lat], tbl1.[lon]' + @sourceDepth +  ', AVG(tbl2.[' + @fieldTarget + ']) [' + @fieldTarget + '], STDEV(tbl2.[' + @fieldTarget + ']) [' + @fieldTarget + '_std] ';
-	IF LEN(@fieldSource) > 0
-		SET @selectList = 'SELECT tbl1.[time], tbl1.[lat], tbl1.[lon]' + @sourceDepth + ', AVG(tbl1.[' + @fieldSource + ']) [' + @fieldSource +'], STDEV(tbl1.[' + @fieldSource + ']) [' + @fieldSource + '_std], AVG(tbl2.[' + @fieldTarget + ']) [' + @fieldTarget + '], STDEV(tbl2.[' + @fieldTarget + ']) [' + @fieldTarget + '_std] ';
+	SET @selectList = 'SELECT tbl1.[time], tbl1.[lat], tbl1.[lon]' + @sourceDepth + ', AVG(tbl1.[' + @fieldSource + ']) [' + @fieldSource +'], STDEV(tbl1.[' + @fieldSource + ']) [' + @fieldSource + '_std], AVG(tbl2.[' + @fieldTarget + ']) [' + @fieldTarget + '], STDEV(tbl2.[' + @fieldTarget + ']) [' + @fieldTarget + '_std] ';
+	IF LEN(@fieldSource) < 1 OR LOWER(@tblSource) = 'tblcruise_trajectory'
+		SET @selectList = 'SELECT tbl1.[time], tbl1.[lat], tbl1.[lon]' + @sourceDepth +  ', AVG(tbl2.[' + @fieldTarget + ']) [' + @fieldTarget + '], STDEV(tbl2.[' + @fieldTarget + ']) [' + @fieldTarget + '_std] ';
 	SET @fromList = ' FROM ' + @tblSource + ' [tbl1], ' + @tblTarget + ' [tbl2] '
 
 
@@ -150,6 +155,7 @@ BEGIN
 				 @sourceLatQuery +
 				 @sourceLonQuery +
 				 @sourceDepthQuery +
+				 @sourceCruiseQuery +
 				 @targetTimeQuery +
 				 @targetLatQuery +
 				 @targetLonQuery +

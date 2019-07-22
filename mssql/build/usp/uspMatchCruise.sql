@@ -27,8 +27,7 @@ BEGIN
 	DECLARE @depth1 NVARCHAR(MAX);
 	DECLARE @depth2 NVARCHAR(MAX);
 
-
-	SET @tblSource = 'tblSeaFlow';
+	SET @tblSource = 'tblCruise_Trajectory';
 	SET @cruise = RTRIM(LTRIM(@cruise));
 	SET @tblTarget = RTRIM(LTRIM(@tblTarget));
 	SET @fieldTarget = RTRIM(LTRIM(@fieldTarget));
@@ -36,9 +35,6 @@ BEGIN
 	SET @del_lat = RTRIM(LTRIM(@del_lat));
 	SET @del_lon = RTRIM(LTRIM(@del_lon));
 	SET @del_depth = RTRIM(LTRIM(@del_depth));
-
-
-
 
 	SELECT 
 		@dt1 = MIN(CONVERT(DATE, [time])), 
@@ -55,7 +51,7 @@ BEGIN
 	[cruise] = @cruise
 
 
-	EXEC uspMatch @tblSource, '', @tblTarget, @fieldTarget, @dt1, @dt2, @lat1, @lat2, @lon1, @lon2, @depth1, @depth2, @del_dt, @del_lat, @del_lon, @del_depth
+	EXEC uspMatch @tblSource, @cruise, @tblTarget, @fieldTarget, @dt1, @dt2, @lat1, @lat2, @lon1, @lon2, @depth1, @depth2, @del_dt, @del_lat, @del_lon, @del_depth
 
 END
 GO
