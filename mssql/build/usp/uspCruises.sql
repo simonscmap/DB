@@ -8,14 +8,12 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 
+CREATE PROC [dbo].[uspCruises] 
 
-
-CREATE PROC [dbo].[uspCatalog] 
 --WITH RECOMPILE 
 AS
 BEGIN
-    SELECT * FROM dbo.udfCatalog()
+	SELECT * FROM dbo.udfCruises() 
 END
 GO
-
 
