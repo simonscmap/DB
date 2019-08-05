@@ -31,6 +31,10 @@ GO
 USE [Opedia]
 GO
 
+
+--- REMOVED the UNIQUE constraint because of the duplication
+--- HAS to be fixed and bring back the UNIQUE constraint 
+
 CREATE UNIQUE NONCLUSTERED INDEX [IX_tblDarwin_Phytoplankton_time_lat_lon_depth] ON [dbo].[tblDarwin_Phytoplankton]
 (
 	[time] ASC,

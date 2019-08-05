@@ -14,18 +14,18 @@ CREATE PROC [dbo].[uspCruiseBounds] @cruiseID INT
 AS
 BEGIN
 
-	SELECT 
-        @cruiseID [ID],
-		CONVERT(DATE, MIN([time])) [dt1], 
-		CONVERT(DATE, MAX([time])) [dt2], 
-		MIN([lat]) [lat1], 
-		MAX([lat]) [lat2], 
-		MIN([lon]) [lon1], 
-		MAX([lon]) [lon2]
+	SELECT
+		ID, 
+		Start_Time [dt1], 
+		End_Time [dt2], 
+		Lat_Min [lat1], 
+		Lat_Max [lat2], 
+		Lon_Min [lon1], 
+		Lon_Max [lon2]
 	FROM 
-		tblCruise_Trajectory 
+		tblCruise
 	WHERE 
-		[Cruise_ID] = @cruiseID
+		ID = @cruiseID
 
 END
 GO
