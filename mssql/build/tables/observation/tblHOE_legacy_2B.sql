@@ -7,7 +7,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE TABLE [dbo].[tblKM1709_mesoscope](
+CREATE TABLE [dbo].[tblHOE_legacy_2B](
 	[time] [datetime] NOT NULL,
 	[lat] [float] NOT NULL,
 	[lon] [float] NOT NULL,
@@ -48,7 +48,7 @@ GO
 USE [Opedia]
 GO
 
-CREATE NONCLUSTERED INDEX [IX_tblKM1709_mesoscope_time_lat_lon_depth] ON [dbo].[tblKM1709_mesoscope]
+CREATE NONCLUSTERED INDEX [IX_tblHOE_legacy_2B_time_lat_lon_depth] ON [dbo].[tblHOE_legacy_2B]
 (
 	[time] ASC,
 	[lat] ASC,

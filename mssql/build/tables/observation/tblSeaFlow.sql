@@ -11,7 +11,6 @@ CREATE TABLE [dbo].[tblSeaFlow](
 	[time] [datetime] NOT NULL,
 	[lat] [float] NOT NULL,
 	[lon] [float] NOT NULL,
-	[depth] [float] NOT NULL,
 	[cruise] [nvarchar](100) NULL,
 	[prochloro_abundance] [float] NULL,
 	[prochloro_diameter] [float] NULL,
@@ -33,9 +32,7 @@ CREATE TABLE [dbo].[tblSeaFlow](
 	[unknown_diameter] [float] NULL,
 	[unknown_carbon_content] [float] NULL,
 	[unknown_biomass] [float] NULL,
-	[total_biomass] [float] NULL,
-	[par] [float] NULL
-) ON [PRIMARY]
+	[total_biomass] [float] NULL) ON [PRIMARY]
 GO
 
 
@@ -74,5 +71,3 @@ INCLUDE ([prochloro_abundance],
 	[unknown_biomass],
 	[total_biomass]) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 GO
-
-
