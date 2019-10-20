@@ -3,7 +3,6 @@ GO
 
 SET ANSI_NULLS ON
 GO
-
 SET QUOTED_IDENTIFIER ON
 GO
 
@@ -18,6 +17,18 @@ CREATE PROC [dbo].[uspDepthProfile] @tableName NVARCHAR(MAX), @fields NVARCHAR(M
 --WITH RECOMPILE 
 AS
 BEGIN
+	DECLARE @inverseLon AS NVARCHAR(MAX);
+	SET @inverseLon = ''
+	IF CONVERT(FLOAT, @lon1) > CONVERT(FLOAT, @lon2)
+	BEGIN
+		SET @inverseLon = ' NOT '
+		DECLARE @swap AS NVARCHAR(MAX);
+		SET @swap = @lon1
+		SET @lon1 = @lon2
+		SET @lon2 = @swap
+	END
+
+
 	DECLARE @query AS NVARCHAR(MAX);
 	SET NOCOUNT ON;
 
@@ -27,7 +38,7 @@ BEGIN
 	DECLARE @depthQuery AS NVARCHAR(MAX)
 	SET @timeQuery = ' WHERE [time] BETWEEN ''' + RTRIM(LTRIM(@dt1)) + '''' + ' AND ''' + RTRIM(LTRIM(@dt2)) + '''';
 	SET @latQuery = ' AND lat BETWEEN ' + RTRIM(LTRIM(@lat1)) + ' AND ' + RTRIM(LTRIM(@lat2));
-	SET @lonQuery = ' AND lon BETWEEN ' + RTRIM(LTRIM(@lon1)) + ' AND ' + RTRIM(LTRIM(@lon2));
+	SET @lonQuery = ' AND ' + @inverseLon + ' lon BETWEEN ' + RTRIM(LTRIM(@lon1)) + ' AND ' + RTRIM(LTRIM(@lon2));
 	SET @depthQuery = ' AND depth BETWEEN ' + RTRIM(LTRIM(@depth1)) + ' AND ' + RTRIM(LTRIM(@depth2));
 
 
@@ -61,6 +72,3 @@ BEGIN
 	-------------------------------------------------
 	EXEC(@query)
 END
-GO
-
-

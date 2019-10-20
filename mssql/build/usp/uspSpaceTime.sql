@@ -3,7 +3,6 @@ GO
 
 SET ANSI_NULLS ON
 GO
-
 SET QUOTED_IDENTIFIER ON
 GO
 
@@ -18,6 +17,18 @@ CREATE PROC [dbo].[uspSpaceTime] @tableName NVARCHAR(MAX), @fields NVARCHAR(MAX)
 --WITH RECOMPILE 
 AS
 BEGIN
+	DECLARE @inverseLon AS NVARCHAR(MAX);
+	SET @inverseLon = ''
+	IF CONVERT(FLOAT, @lon1) > CONVERT(FLOAT, @lon2)
+	BEGIN
+		SET @inverseLon = ' NOT '
+		DECLARE @swap AS NVARCHAR(MAX);
+		SET @swap = @lon1
+		SET @lon1 = @lon2
+		SET @lon2 = @swap
+	END
+
+
 	DECLARE @query AS NVARCHAR(MAX);
 	SET NOCOUNT ON;
 
@@ -27,7 +38,7 @@ BEGIN
 	DECLARE @depthQuery AS NVARCHAR(MAX)
 	SET @timeQuery = ' WHERE [time] BETWEEN ''' + RTRIM(LTRIM(@dt1)) + '''' + ' AND ''' + RTRIM(LTRIM(@dt2)) + '''';
 	SET @latQuery = ' AND lat BETWEEN ' + RTRIM(LTRIM(@lat1)) + ' AND ' + RTRIM(LTRIM(@lat2));
-	SET @lonQuery = ' AND lon BETWEEN ' + RTRIM(LTRIM(@lon1)) + ' AND ' + RTRIM(LTRIM(@lon2));
+	SET @lonQuery = ' AND ' + @inverseLon + ' lon BETWEEN ' + RTRIM(LTRIM(@lon1)) + ' AND ' + RTRIM(LTRIM(@lon2));
 	SET @depthQuery = ' AND depth BETWEEN ' + RTRIM(LTRIM(@depth1)) + ' AND ' + RTRIM(LTRIM(@depth2));
 
 
@@ -58,8 +69,17 @@ BEGIN
 
 
 
+	IF COL_LENGTH(RTRIM(LTRIM(@tableName)), 'depth') IS NOT NULL	-- if table has depth field
+		SET @selList = @selList + 'depth, '
+	SET @selList = @selList + RTRIM(LTRIM(@fields))
+	IF RTRIM(LTRIM(@fields)) LIKE '%*%'
+		SET @selList = ' * '
+
+	
+	
+	
 	-------------- construct the query --------------
-	SET @query = 'SELECT ' + @selList + RTRIM(LTRIM(@fields)) + ' FROM ' + RTRIM(LTRIM(@tableName)) + 
+	SET @query = 'SELECT ' + @selList+ ' FROM ' + RTRIM(LTRIM(@tableName)) + 
 	@timeQuery +
 	@latQuery +
 	@lonQuery + ' ORDER BY ' + @orderList; 
@@ -67,16 +87,14 @@ BEGIN
 
 	IF COL_LENGTH(RTRIM(LTRIM(@tableName)), 'depth') IS NOT NULL	-- if table has depth field
 	BEGIN
-		SET @query = 'SELECT ' + @selList + 'depth, ' + RTRIM(LTRIM(@fields)) + ' FROM ' + RTRIM(LTRIM(@tableName)) + 
+		SET @query = 'SELECT ' + @selList + ' FROM ' + RTRIM(LTRIM(@tableName)) + 
 		@timeQuery +
 		@latQuery +
 		@lonQuery +
 		@depthQuery + ' ORDER BY ' + RTRIM(LTRIM(@timeField)) + ', depth, lat, lon' 
 	END
+
 	-------------------------------------------------
 	
 	EXEC(@query)
 END
-GO
-
-
