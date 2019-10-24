@@ -58,3 +58,8 @@ SELECT RTRIM(LTRIM(Short_Name)) AS Variable,
    JOIN tblKeywords key_table ON [var_table].ID = [key_table].var_ID GROUP BY var_ID)
    AS keywords_agg ON [keywords_agg].var_ID = [tblVariables].ID
 )
+
+
+
+
+
