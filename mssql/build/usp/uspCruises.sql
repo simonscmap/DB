@@ -13,7 +13,7 @@ CREATE PROC [dbo].[uspCruises]
 --WITH RECOMPILE 
 AS
 BEGIN
-	SELECT * FROM dbo.udfCruises() 
+	SELECT * FROM dbo.udfCruises() Order by [Name]
 END
 GO
 

@@ -18,6 +18,8 @@ CREATE TABLE [dbo].[tblDatasets](
 	[Distributor] [nvarchar](100) NULL,
 	[Description] [nvarchar](max) NULL,
 	[Climatology] [bit] NULL,
+	[Acknowledgement] [nvarchar](max) NULL,
+	[Doc_URL] [nvarchar](max) NULL,
  CONSTRAINT [PK_tblDatasets] PRIMARY KEY CLUSTERED 
 (
 	[ID] ASC
