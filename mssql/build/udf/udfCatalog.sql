@@ -29,7 +29,7 @@ SELECT RTRIM(LTRIM(Short_Name)) AS Variable,
    JSON_VALUE(JSON_stats,'$.lon.max') AS [Lon_Max],
    JSON_VALUE(JSON_stats,'$.depth.min') AS [Depth_Min],
    JSON_VALUE(JSON_stats,'$.depth.max') AS [Depth_Max],
-   JSON_VALUE(JSON_stats,'$."'+[Short_Name]+'".max') AS [Variable_25th],
+   JSON_VALUE(JSON_stats,'$."'+[Short_Name]+'"."25%"') AS [Variable_25th],
    JSON_VALUE(JSON_stats,'$."'+[Short_Name]+'"."50%"') AS [Variable_50th],
    JSON_VALUE(JSON_stats,'$."'+[Short_Name]+'"."75%"') AS [Variable_75th],
    JSON_VALUE(JSON_stats,'$."'+[Short_Name]+'".count') AS [Variable_Count],
@@ -58,8 +58,3 @@ SELECT RTRIM(LTRIM(Short_Name)) AS Variable,
    JOIN tblKeywords key_table ON [var_table].ID = [key_table].var_ID GROUP BY var_ID)
    AS keywords_agg ON [keywords_agg].var_ID = [tblVariables].ID
 )
-
-
-
-
-
