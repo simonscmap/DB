@@ -7,7 +7,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 
-CREATE PROC [dbo].[uspLookupVars] @hint AS NVARCHAR(MAX)
+CREATE PROC [dbo].[uspSearchCatalog] @hint AS NVARCHAR(MAX)
 
 --WITH RECOMPILE 
 AS
