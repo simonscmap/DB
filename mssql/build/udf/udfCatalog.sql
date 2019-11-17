@@ -1,6 +1,7 @@
 USE [Opedia]
 GO
 
+
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -23,27 +24,29 @@ SELECT RTRIM(LTRIM(Short_Name)) AS Variable,
    RTRIM(LTRIM(Spatial_Resolution)) AS [Spatial_Resolution],
    JSON_VALUE(JSON_stats,'$.time.min') AS [Time_Min],
    JSON_VALUE(JSON_stats,'$.time.max') AS [Time_Max],
-   JSON_VALUE(JSON_stats,'$.lat.min') AS [Lat_Min],
-   JSON_VALUE(JSON_stats,'$.lat.max') AS [Lat_Max],
-   JSON_VALUE(JSON_stats,'$.lon.min') AS [Lon_Min],
-   JSON_VALUE(JSON_stats,'$.lon.max') AS [Lon_Max],
-   JSON_VALUE(JSON_stats,'$.depth.min') AS [Depth_Min],
-   JSON_VALUE(JSON_stats,'$.depth.max') AS [Depth_Max],
-   JSON_VALUE(JSON_stats,'$."'+[Short_Name]+'"."25%"') AS [Variable_25th],
-   JSON_VALUE(JSON_stats,'$."'+[Short_Name]+'"."50%"') AS [Variable_50th],
-   JSON_VALUE(JSON_stats,'$."'+[Short_Name]+'"."75%"') AS [Variable_75th],
-   JSON_VALUE(JSON_stats,'$."'+[Short_Name]+'".count') AS [Variable_Count],
-   JSON_VALUE(JSON_stats,'$."'+[Short_Name]+'".mean') AS [Variable_Mean],
-   JSON_VALUE(JSON_stats,'$."'+[Short_Name]+'".std') AS [Variable_Std],
-   JSON_VALUE(JSON_stats,'$."'+[Short_Name]+'".min') AS [Variable_Min],
-   JSON_VALUE(JSON_stats,'$."'+[Short_Name]+'".max') AS [Variable_Max],
+   CAST(JSON_VALUE(JSON_stats,'$.lat.min') AS float) AS [Lat_Min],
+   CAST(JSON_VALUE(JSON_stats,'$.lat.max') AS float) AS [Lat_Max],
+   CAST(JSON_VALUE(JSON_stats,'$.lon.min') AS float) AS [Lon_Min],
+   CAST(JSON_VALUE(JSON_stats,'$.lon.max') AS float) AS [Lon_Max],
+   CAST(JSON_VALUE(JSON_stats,'$.depth.min') AS float) AS [Depth_Min],
+   CAST(JSON_VALUE(JSON_stats,'$.depth.max') AS float) AS [Depth_Max],
+   CAST(JSON_VALUE(JSON_stats,'$."'+[Short_Name]+'"."25%"') AS float) AS [Variable_25th],
+   CAST(JSON_VALUE(JSON_stats,'$."'+[Short_Name]+'"."50%"') AS float) AS [Variable_50th],
+   CAST(JSON_VALUE(JSON_stats,'$."'+[Short_Name]+'"."75%"') AS float) AS [Variable_75th],
+   CAST(JSON_VALUE(JSON_stats,'$."'+[Short_Name]+'".count') AS float) AS [Variable_Count],
+   CAST(JSON_VALUE(JSON_stats,'$."'+[Short_Name]+'".mean') AS float) AS [Variable_Mean],
+   CAST(JSON_VALUE(JSON_stats,'$."'+[Short_Name]+'".std') AS float) AS [Variable_Std],
+   CAST(JSON_VALUE(JSON_stats,'$."'+[Short_Name]+'".min') AS float) AS [Variable_Min],
+   CAST(JSON_VALUE(JSON_stats,'$."'+[Short_Name]+'".max') AS float) AS [Variable_Max],
    RTRIM(LTRIM(Comment)) AS [Comment],
    RTRIM(LTRIM(Dataset_Long_Name)) AS [Dataset_Name],
-   RTRIM(LTRIM(Data_Source)) AS [Data_Source],
+   RTRIM(LTRIM([Data_Source])) AS [Data_Source],
    RTRIM(LTRIM(Distributor)) AS [Distributor],
-   RTRIM(LTRIM(Description)) AS [Dataset_Description],
+   RTRIM(LTRIM([Description])) AS [Dataset_Description],
+   RTRIM(LTRIM([Acknowledgement])) AS [Acknowledgement],   
    [tblVariables].Dataset_ID AS [Dataset_ID],
    [tblVariables].ID AS [ID],
+   [tblVariables].Visualize AS [Visualize],
    [keywords_agg].Keywords AS [Keywords]
    FROM tblVariables
    JOIN tblDataset_Stats ON [tblVariables].Table_Name = [tblDataset_Stats].Dataset_Name
@@ -58,3 +61,4 @@ SELECT RTRIM(LTRIM(Short_Name)) AS Variable,
    JOIN tblKeywords key_table ON [var_table].ID = [key_table].var_ID GROUP BY var_ID)
    AS keywords_agg ON [keywords_agg].var_ID = [tblVariables].ID
 )
+
