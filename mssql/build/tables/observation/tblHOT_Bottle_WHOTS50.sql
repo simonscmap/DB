@@ -73,7 +73,8 @@ CREATE TABLE [dbo].[tblHOT_Bottle_WHOTS50](
 	[PP_d12_bottle_whots50_hot] [float] NULL,
 	[NO2_bottle_whots50_hot] [float] NULL,
 	[lat] [float] NOT NULL,
-	[lon] [float] NOT NULL
+	[lon] [float] NOT NULL,
+	[depth] [float] NOT NULL
 ) ON [PRIMARY]
 GO
 
@@ -86,7 +87,8 @@ CREATE NONCLUSTERED INDEX [IX_tblHOT_Bottle_WHOTS50_time_lat_lon_depth] ON [dbo]
 (
 	[time] ASC,
 	[lat] ASC,
-	[lon] ASC
+	[lon] ASC,
+	[depth] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 GO
 
