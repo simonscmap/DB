@@ -1,0 +1,20 @@
+USE [Opedia]
+GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE PROC [dbo].[uspAPICalls] 
+--WITH RECOMPILE 
+AS
+BEGIN
+	SELECT *
+	FROM tblApi_Calls
+	WHERE Query is not null
+	AND Query LIKE '%tbl%'
+END
+GO
