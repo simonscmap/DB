@@ -8,13 +8,14 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 
-CREATE PROC [dbo].[uspAPICalls] 
+CREATE PROC [dbo].[uspCalls_Query] 
 --WITH RECOMPILE 
 AS
 BEGIN
-	SELECT *
+	SELECT Query
 	FROM tblApi_Calls
-	WHERE Query is not null
+	WHERE Query IS NOT NULL
 	AND Query LIKE '%tbl%'
+	AND User_ID NOT IN (1, 2, 4, 5, 6, 7, 10)
 END
 GO
