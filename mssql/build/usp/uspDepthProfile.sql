@@ -9,7 +9,7 @@ GO
 
 
 
-CREATE PROC [dbo].[uspDepthProfile] @tableName NVARCHAR(MAX), @fields NVARCHAR(MAX), 
+CREATE PROC [dbo].[uspDepthProfile] @tableName NVARCHAR(MAX), @field NVARCHAR(MAX), 
 								 @dt1 NVARCHAR(MAX), @dt2 NVARCHAR(MAX), 
 								 @lat1 NVARCHAR(MAX), @lat2 NVARCHAR(MAX), 
 								 @lon1 NVARCHAR(MAX), @lon2 NVARCHAR(MAX), 
@@ -17,6 +17,21 @@ CREATE PROC [dbo].[uspDepthProfile] @tableName NVARCHAR(MAX), @fields NVARCHAR(M
 --WITH RECOMPILE 
 AS
 BEGIN
+	-------------- make sure table and field names are quoted --------------
+	SET @tableName = RTRIM(LTRIM(@tableName)); 
+	SET @tableName = REPLACE(@tableName, '[', '');
+	SET @tableName = REPLACE(@tableName, ']', '');
+	SET @tableName = QUOTENAME(@tableName)
+
+	SET @field = RTRIM(LTRIM(@field)); 
+	SET @field = REPLACE(@field, '[', '');
+	SET @field = REPLACE(@field, ']', '');
+	DECLARE @field_std NVARCHAR(MAX) = @field + '_std';
+	SET @field = QUOTENAME(@field);
+	SET @field_std = QUOTENAME(@field_std);
+	------------------------------------------------------------------------
+	
+
 	DECLARE @inverseLon AS NVARCHAR(MAX);
 	SET @inverseLon = ''
 	IF CONVERT(FLOAT, @lon1) > CONVERT(FLOAT, @lon2)
@@ -59,11 +74,11 @@ BEGIN
 	DECLARE @selList AS NVARCHAR(MAX);
 	
 	-------------- construct the query --------------
-	IF COL_LENGTH(RTRIM(LTRIM(@tableName)), 'depth') IS NOT NULL	-- if table has depth field
+	IF COL_LENGTH(@tableName, 'depth') IS NOT NULL	-- if table has depth field
 	BEGIN
 
-		SET @selList = 'AVG(lat) AS lat, AVG(lon) AS lon, AVG(' + RTRIM(LTRIM(@fields)) +') AS ' + RTRIM(LTRIM(@fields)) + ', STDEV(' + RTRIM(LTRIM(@fields)) + ') AS ' + RTRIM(LTRIM(@fields)) + '_std, ' + 'depth '
-		SET @query = 'SELECT ' + @selList + ' FROM ' + RTRIM(LTRIM(@tableName)) + 
+		SET @selList = 'AVG(lat) AS lat, AVG(lon) AS lon, AVG(' + @field +') AS ' + @field + ', STDEV(' + RTRIM(LTRIM(@field)) + ') AS ' + @field_std + ', depth '
+		SET @query = 'SELECT ' + @selList + ' FROM ' + @tableName + 
 		@timeQuery +
 		@latQuery +
 		@lonQuery + 

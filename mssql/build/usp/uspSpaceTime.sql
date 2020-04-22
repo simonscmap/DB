@@ -9,7 +9,7 @@ GO
 
 
 
-CREATE PROC [dbo].[uspSpaceTime] @tableName NVARCHAR(MAX), @fields NVARCHAR(MAX), 
+CREATE PROC [dbo].[uspSpaceTime] @tableName NVARCHAR(MAX), @field NVARCHAR(MAX), 
 								 @dt1 NVARCHAR(MAX), @dt2 NVARCHAR(MAX), 
 								 @lat1 NVARCHAR(MAX), @lat2 NVARCHAR(MAX), 
 								 @lon1 NVARCHAR(MAX), @lon2 NVARCHAR(MAX), 
@@ -17,6 +17,18 @@ CREATE PROC [dbo].[uspSpaceTime] @tableName NVARCHAR(MAX), @fields NVARCHAR(MAX)
 --WITH RECOMPILE 
 AS
 BEGIN
+	-------------- make sure table and field names are quoted --------------
+	SET @tableName = RTRIM(LTRIM(@tableName)); 
+	SET @tableName = REPLACE(@tableName, '[', '');
+	SET @tableName = REPLACE(@tableName, ']', '');
+	SET @tableName = QUOTENAME(@tableName)
+
+	SET @field = RTRIM(LTRIM(@field)); 
+	SET @field = REPLACE(@field, '[', '');
+	SET @field = REPLACE(@field, ']', '');
+	SET @field = QUOTENAME(@field);
+	------------------------------------------------------------------------
+
 	DECLARE @inverseLon AS NVARCHAR(MAX);
 	SET @inverseLon = ''
 	IF CONVERT(FLOAT, @lon1) > CONVERT(FLOAT, @lon2)
@@ -46,7 +58,7 @@ BEGIN
 	SET @timeField = '[time]'
 	IF @tableName LIKE '%_Climatology'			-- if table represents a climatology data set
 	BEGIN
-		IF COL_LENGTH(RTRIM(LTRIM(@tableName)), 'month') IS NOT NULL	-- if table has month field
+		IF COL_LENGTH(@tableName, 'month') IS NOT NULL	-- if table has month field
 		BEGIN
 			SET @timeField = '[month]'
 			SET @dt1 = DATEPART(month, @dt1);
@@ -60,7 +72,7 @@ BEGIN
 	DECLARE @orderList AS NVARCHAR(MAX);
 	SET @selList = RTRIM(LTRIM(@timeField)) + ', lat, lon, '
 	SET @orderList = RTRIM(LTRIM(@timeField)) + ', lat, lon '
-	IF COL_LENGTH(RTRIM(LTRIM(@tableName)), 'hour') IS NOT NULL	-- if table has hour field
+	IF COL_LENGTH(@tableName, 'hour') IS NOT NULL	-- if table has hour field
 	BEGIN
 		SET @selList = @selList + '[hour], '
 		SET @orderList = RTRIM(LTRIM(@timeField)) + ', [hour], lat, lon '
@@ -69,25 +81,25 @@ BEGIN
 
 
 
-	IF COL_LENGTH(RTRIM(LTRIM(@tableName)), 'depth') IS NOT NULL	-- if table has depth field
+	IF COL_LENGTH(@tableName, 'depth') IS NOT NULL	-- if table has depth field
 		SET @selList = @selList + 'depth, '
-	SET @selList = @selList + RTRIM(LTRIM(@fields))
-	IF RTRIM(LTRIM(@fields)) LIKE '%*%'
+	SET @selList = @selList + @field
+	IF @field LIKE '%*%'
 		SET @selList = ' * '
 
 	
 	
 	
 	-------------- construct the query --------------
-	SET @query = 'SELECT ' + @selList+ ' FROM ' + RTRIM(LTRIM(@tableName)) + 
+	SET @query = 'SELECT ' + @selList+ ' FROM ' + @tableName + 
 	@timeQuery +
 	@latQuery +
 	@lonQuery + ' ORDER BY ' + @orderList; 
 
 
-	IF COL_LENGTH(RTRIM(LTRIM(@tableName)), 'depth') IS NOT NULL	-- if table has depth field
+	IF COL_LENGTH(@tableName, 'depth') IS NOT NULL	-- if table has depth field
 	BEGIN
-		SET @query = 'SELECT ' + @selList + ' FROM ' + RTRIM(LTRIM(@tableName)) + 
+		SET @query = 'SELECT ' + @selList + ' FROM ' + @tableName + 
 		@timeQuery +
 		@latQuery +
 		@lonQuery +

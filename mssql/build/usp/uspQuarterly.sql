@@ -16,6 +16,20 @@ CREATE PROC [dbo].[uspQuarterly] @tableName NVARCHAR(MAX), @field NVARCHAR(MAX),
 --WITH RECOMPILE 
 AS
 BEGIN
+	-------------- make sure table and field names are quoted --------------
+	SET @tableName = RTRIM(LTRIM(@tableName)); 
+	SET @tableName = REPLACE(@tableName, '[', '');
+	SET @tableName = REPLACE(@tableName, ']', '');
+	SET @tableName = QUOTENAME(@tableName)
+
+	SET @field = RTRIM(LTRIM(@field)); 
+	SET @field = REPLACE(@field, '[', '');
+	SET @field = REPLACE(@field, ']', '');
+	DECLARE @field_std NVARCHAR(MAX) = @field + '_std';
+	SET @field = QUOTENAME(@field);
+	SET @field_std = QUOTENAME(@field_std);
+	------------------------------------------------------------------------
+
 	DECLARE @inverseLon AS NVARCHAR(MAX);
 	SET @inverseLon = ''
 	IF CONVERT(FLOAT, @lon1) > CONVERT(FLOAT, @lon2)
@@ -42,24 +56,24 @@ BEGIN
 
 
 	DECLARE @selList AS NVARCHAR(MAX);
-	SET @selList =  'YEAR([time]) [year], DATEPART(QUARTER, [time]) [quarter], AVG(lat) AS lat, AVG(lon) AS lon, AVG(' + RTRIM(LTRIM(@field)) +') AS ' + RTRIM(LTRIM(@field)) + ', STDEV(' + RTRIM(LTRIM(@field)) + ') AS ' + RTRIM(LTRIM(@field)) + '_std '
+	SET @selList =  'YEAR([time]) [year], DATEPART(QUARTER, [time]) [quarter], AVG(lat) AS lat, AVG(lon) AS lon, AVG(' + @field +') AS ' + @field + ', STDEV(' + @field + ') AS ' + @field_std
 
 	DECLARE @groupOrder AS NVARCHAR(MAX);
 	SET @groupOrder = ' GROUP BY YEAR([time]), DATEPART(QUARTER, [time]) ORDER BY [year], [quarter]'	
 	
 	-------------- construct the query --------------
 	
-	SET @query = 'SELECT ' + @selList + ' FROM ' + RTRIM(LTRIM(@tableName)) + 
+	SET @query = 'SELECT ' + @selList + ' FROM ' + @tableName + 
 	@timeQuery +
 	@latQuery +
 	@lonQuery +
 	@groupOrder;  
 
 
-	IF COL_LENGTH(RTRIM(LTRIM(@tableName)), 'depth') IS NOT NULL	-- if table has depth field
+	IF COL_LENGTH(@tableName, 'depth') IS NOT NULL	-- if table has depth field
 	BEGIN
-		SET @selList =  'YEAR([time]) [year], DATEPART(QUARTER, [time]) [quarter], AVG(lat) AS lat, AVG(lon) AS lon, AVG(depth) AS depth, AVG(' + RTRIM(LTRIM(@field)) +') AS ' + RTRIM(LTRIM(@field)) + ', STDEV(' + RTRIM(LTRIM(@field)) + ') AS ' + RTRIM(LTRIM(@field)) + '_std '
-		SET @query = 'SELECT ' + @selList + ' FROM ' + RTRIM(LTRIM(@tableName)) + 
+		SET @selList =  'YEAR([time]) [year], DATEPART(QUARTER, [time]) [quarter], AVG(lat) AS lat, AVG(lon) AS lon, AVG(depth) AS depth, AVG(' + @field +') AS ' + @field + ', STDEV(' + @field + ') AS ' + @field_std
+		SET @query = 'SELECT ' + @selList + ' FROM ' + @tableName + 
 		@timeQuery +
 		@latQuery +
 		@lonQuery +
