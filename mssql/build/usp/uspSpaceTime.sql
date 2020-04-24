@@ -56,7 +56,7 @@ BEGIN
 
 	DECLARE @timeField AS NVARCHAR(50)
 	SET @timeField = '[time]'
-	IF @tableName LIKE '%_Climatology'			-- if table represents a climatology data set
+	IF @tableName LIKE '%_Climatology]'			-- if table represents a climatology data set
 	BEGIN
 		IF COL_LENGTH(@tableName, 'month') IS NOT NULL	-- if table has month field
 		BEGIN
