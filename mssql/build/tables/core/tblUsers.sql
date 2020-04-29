@@ -25,6 +25,9 @@ CREATE TABLE [dbo].[tblUsers](
 ) ON [PRIMARY]
 GO
 
+ALTER TABLE [dbo].[tblUsers]
+ADD Is_Data_Submission_Admin bool NOT NULL
+ADD CONSTRAINT [DF_tblApi_Calls_Date] DEFAULT false
 
 -- indices
 USE [Opedia]
