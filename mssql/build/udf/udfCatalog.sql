@@ -43,13 +43,13 @@ SELECT RTRIM(LTRIM(Short_Name)) AS Variable,
    RTRIM(LTRIM([Data_Source])) AS [Data_Source],
    RTRIM(LTRIM(Distributor)) AS [Distributor],
    RTRIM(LTRIM([Description])) AS [Dataset_Description],
-   RTRIM(LTRIM([Acknowledgement])) AS [Acknowledgement],   
+   RTRIM(LTRIM([Acknowledgement])) AS [Acknowledgement],
    [tblVariables].Dataset_ID AS [Dataset_ID],
    [tblVariables].ID AS [ID],
    [tblVariables].Visualize AS [Visualize],
    [keywords_agg].Keywords AS [Keywords]
    FROM tblVariables
-   JOIN tblDataset_Stats ON [tblVariables].Table_Name = [tblDataset_Stats].Dataset_Name
+   JOIN tblDataset_Stats ON [tblVariables].Dataset_ID = [tblDataset_Stats].Dataset_ID
    JOIN tblDatasets ON [tblVariables].Dataset_ID=[tblDatasets].ID
    JOIN tblTemporal_Resolutions ON [tblVariables].Temporal_Res_ID=[tblTemporal_Resolutions].ID
    JOIN tblSpatial_Resolutions ON [tblVariables].Spatial_Res_ID=[tblSpatial_Resolutions].ID
@@ -61,4 +61,3 @@ SELECT RTRIM(LTRIM(Short_Name)) AS Variable,
    JOIN tblKeywords key_table ON [var_table].ID = [key_table].var_ID GROUP BY var_ID)
    AS keywords_agg ON [keywords_agg].var_ID = [tblVariables].ID
 )
-
