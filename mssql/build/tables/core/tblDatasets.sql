@@ -20,7 +20,8 @@ CREATE TABLE [dbo].[tblDatasets](
 	[Climatology] [bit] NULL,
 	[Acknowledgement] [nvarchar](max) NULL,
 	[Doc_URL] [nvarchar](max) NULL,
- CONSTRAINT [PK_tblDatasets] PRIMARY KEY CLUSTERED 
+	[Icon_URL] [nvarchar](max) NULL,
+ CONSTRAINT [PK_tblDatasets] PRIMARY KEY CLUSTERED
 (
 	[ID] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
@@ -31,7 +32,7 @@ GO
 
 
 
--- indices 
+-- indices
 USE Opedia
 GO
 

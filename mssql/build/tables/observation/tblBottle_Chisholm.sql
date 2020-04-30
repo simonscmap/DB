@@ -46,27 +46,27 @@ CREATE TABLE [dbo].[tblBottle_Chisholm](
 	[dvchla_cmore] [float] NULL,
 	[mvchla_cmore] [float] NULL,
 	[hplc_cmore] [float] NULL,
-	[hbact_cmore] [float] NULL,
-	[pbact_Chisholm] [float] NULL,
-	[sbact_cmore] [float] NULL,
-	[ebact_cmore] [float] NULL,
+	[Het_bact_abundance] [float] NULL,
+	[Pro_abundance] [float] NULL,
+	[Syn_abundance] [float] NULL,
+	[Eukaryote_abundance] [float] NULL,
 	[NO2_cmore] [float] NULL,
 	[NH4_cmore] [float] NULL,
-	[pbact_quality_Chisholm] [float] NULL,
-	[ProChl_Chisholm] [float] NULL,
-	[ProFSC_Chisholm] [float] NULL,
-	[MIT9312PCR_Chisholm] [float] NULL,
-	[MIT9312PCR_quality_Chisholm] [float] NULL,
-	[MED4PCR_Chisholm] [float] NULL,
-	[MED4PCR_quality_Chisholm] [float] NULL,
-	[HL3PCR_Chisholm] [float] NULL,
-	[HL3PCR_quality_Chisholm] [float] NULL,
-	[HL4PCR_Chisholm] [float] NULL,
-	[HL4PCR_quality_Chisholm] [float] NULL,
-	[NATL2APCR_Chisholm] [float] NULL,
-	[NATL2APCR_quality_Chisholm] [float] NULL,
-	[MIT9313PCR_Chisholm] [float] NULL,
-	[MIT9313PCR_quality_Chisholm] [float] NULL
+	[Pro_abundance_quality] [float] NULL,
+	[Pro_chl_fluor] [float] NULL,
+	[Pro_FSC] [float] NULL,
+	[Pro_eMIT9312_abundance] [float] NULL,
+	[Pro_eMIT9312_abundance_quality] [float] NULL,
+	[Pro_eMED4_abundance] [float] NULL,
+	[Pro_eMED4_abundance_quality] [float] NULL,
+	[Pro_eHL3_abundance] [float] NULL,
+	[Pro_eHL3_abundance_quality] [float] NULL,
+	[Pro_eHL4_abundance] [float] NULL,
+	[Pro_eHL4_abundance_quality] [float] NULL,
+	[Pro_eNATL2A_abundance] [float] NULL,
+	[Pro_eNATL2A_abundance_quality] [float] NULL,
+	[Pro_eMIT9313_abundance] [float] NULL,
+	[Pro_eMIT9313_abundance_quality] [float] NULL
 ) ON [PRIMARY]
 GO
 
@@ -90,5 +90,3 @@ CREATE NONCLUSTERED INDEX [IX_tblBottle_Chisholm_time_lat_lon] ON [dbo].[tblBott
 	[depth] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 GO
-
-
