@@ -33,7 +33,7 @@ BEGIN
 			SET @where = @where + ' Keywords LIKE ''' + '%' + @word + '%'''
 			SET @where = @where + ' OR Variable LIKE ''' + '%' + @word + '%'''
 			SET @where = @where + ' OR Long_Name LIKE ''' + '%' + @word + '%'''
-			SET @where = @where + ' OR Dataset_Name LIKE ''' + '%' + @word + '%'''
+			-- SET @where = @where + ' OR Dataset_Name LIKE ''' + '%' + @word + '%'''
 			SET @where = @where + ' OR Make LIKE ''' + '%' + @word + '%'''
 			SET @where = @where + ' OR Study_Domain LIKE ''' + '%' + @word + '%'''
 			SET @where = @where + ')'
