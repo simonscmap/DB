@@ -27,7 +27,9 @@ CREATE TABLE [dbo].[tblCruise](
 ) ON [FG1]
 GO
 
-
+ALTER TABLE [tblCruise] ADD CONSTRAINT [FK_tblCruise_tblCruise_Series] FOREIGN KEY([Cruise_Series])
+REFERENCES tblCruise_Series ([ID])
+GO
 
 
 
@@ -55,5 +57,12 @@ CREATE NONCLUSTERED INDEX [IX_tblCruise_Ship] ON [dbo].[tblCruise]
 	[Ship_Name] ASC
 )
 WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)
+ON [FG1]
+GO
+
+CREATE NONCLUSTERED INDEX [IX_tblCruise_Cruise_Series] ON [tblCruise]
+(
+	[Cruise_Series] ASC
+)
 ON [FG1]
 GO
