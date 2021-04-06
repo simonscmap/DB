@@ -10,7 +10,7 @@ GO
 CREATE TABLE [dbo].[tblCruise](
 	[ID] [int] IDENTITY(1,1) NOT NULL,
 	[Nickname] [nvarchar](20) NOT NULL,
-	[Name] [nvarchar](20) NULL,
+	[Name] [nvarchar](20) UNIQUE NOT NULL,
 	[Ship_Name] [nvarchar](50) NULL,
 	[Start_Time] [datetime] NOT NULL,
 	[End_Time] [datetime] NOT NULL,

@@ -7,7 +7,7 @@
     SET QUOTED_IDENTIFIER ON
 
 
-    CREATE TABLE [dbo].[tblKM1906_Gradients3](
+    CREATE TABLE [dbo].[tblKM1906_Gradients3_Profiling_Float](
 
                    [time]  [datetime]  NOT NULL,
                 [lat]     [float]  NOT NULL,
@@ -31,7 +31,7 @@
     USE [Opedia]
 
 
-    CREATE  NONCLUSTERED INDEX [IX_tblKM1906_Gradients3_time_lat_lon_depth] ON [dbo].[tblKM1906_Gradients3]
+    CREATE  NONCLUSTERED INDEX [IX_tblKM1906_Gradients3_Profiling_Float_time_lat_lon_depth] ON [dbo].[tblKM1906_Gradients3_Profiling_Float]
     (
     	[time] ASC,
     	[lat] ASC,
