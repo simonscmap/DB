@@ -8,7 +8,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE TABLE [dbo].[tblRegions](
-	[Region_ID] [int] IDENTITY(1,1) NOT NULL,
+	[Region_ID] [int] NOT NULL,
 	[Region_Name] [nvarchar](300) NOT NULL,
  CONSTRAINT [PK_tblRegions] PRIMARY KEY CLUSTERED
 (

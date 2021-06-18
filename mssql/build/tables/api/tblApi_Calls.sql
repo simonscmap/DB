@@ -8,7 +8,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE TABLE [dbo].[tblApi_Calls](
-	[ID] [bigint] PRIMARY KEY IDENTITY(1,1),
+	[ID] [bigint] IDENTITY(1,1),
 	[Date_Time] [datetime] NOT NULL,
     [Ip_Address] [nvarchar](39) NOT NULL,
     [Host_Name] [nvarchar](150) NOT NULL,
@@ -16,6 +16,7 @@ CREATE TABLE [dbo].[tblApi_Calls](
     [Route_ID] [int] NOT NULL,
     [Api_Key_Id] [int],
     [Auth_Method] [int],
+    CONSTRAINT [PK_tblDatasets] PRIMARY KEY CLUSTERED ([ID] ASC)
     CONSTRAINT [FK_USER_ID] FOREIGN KEY (User_ID) REFERENCES [dbo].[tblUsers] (UserID),
     CONSTRAINT [FK_ROUTE_ID] FOREIGN KEY (Route_ID) REFERENCES [dbo].[tblApi_Routes] (ID),
     CONSTRAINT [FK_API_KEY_ID] FOREIGN KEY (Api_Key_Id) REFERENCES [dbo].[tblApi_Keys] (ID),

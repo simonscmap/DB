@@ -28,7 +28,7 @@ GO
 USE [Opedia]
 GO
 
-CREATE UNIQUE NONCLUSTERED INDEX [IX_tblGlobalDrifterProgram_time_lat_lon_depth] ON [dbo].[tblGlobalDrifterProgram]
+CREATE CLUSTERED INDEX [IX_tblGlobalDrifterProgram_time_lat_lon_depth] ON [dbo].[tblGlobalDrifterProgram]
 (
 	[time] ASC,
 	[lat] ASC,

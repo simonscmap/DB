@@ -31,7 +31,7 @@
     USE [Opedia]
 
 
-    CREATE UNIQUE NONCLUSTERED INDEX [IX_tblGOSHIP_Reported_time_lat_lon_depth] ON [dbo].[tblGOSHIP_Reported]
+    CREATE UNIQUE CLUSTERED INDEX [IX_tblGOSHIP_Reported_time_lat_lon_depth] ON [dbo].[tblGOSHIP_Reported]
     (
     	[time] ASC,
     	[lat] ASC,
