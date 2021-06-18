@@ -27,7 +27,7 @@
     USE [Opedia]
 
 
-    CREATE  NONCLUSTERED INDEX [IX_tblHOT_TSG_Time_Series_time_lat_lon_] ON [dbo].[tblHOT_TSG_Time_Series]
+    CREATE  UNIQUE CLUSTERED INDEX [IX_tblHOT_TSG_Time_Series_time_lat_lon] ON [dbo].[tblHOT_TSG_Time_Series]
     (
     	[time] ASC,
     	[lat] ASC,

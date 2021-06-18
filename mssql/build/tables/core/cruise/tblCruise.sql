@@ -20,6 +20,7 @@ CREATE TABLE [dbo].[tblCruise](
 	[Lon_Max] [float] NOT NULL,
 	[Chief_Name] [nvarchar](100) NULL,
 	[Keywords] [nchar](100) NULL,
+	[Cruise_Series] [int] NULL, 
  CONSTRAINT [PK_tblCruise] PRIMARY KEY CLUSTERED
 (
 	[ID] ASC

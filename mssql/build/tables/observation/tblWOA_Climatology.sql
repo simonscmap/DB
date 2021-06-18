@@ -73,26 +73,27 @@ GO
 ---------------------
 
 
+
 USE [Opedia]
 GO
 
-CREATE UNIQUE NONCLUSTERED INDEX [IX_tblWOA_Climatology_month_lat_lon_depth] ON [dbo].[tblWOA_Climatology]
+CREATE UNIQUE CLUSTERED INDEX [IX_tblWOA_Climatology_month_lat_lon_depth] ON [dbo].[tblWOA_Climatology]
 (
 	[month] ASC,
 	[lat] ASC,
 	[lon] ASC,
 	[depth] ASC
 )
-INCLUDE ([AOU_WOA_clim],
-	[density_WOA_clim],
-	[o2sat_WOA_clim],
-	[oxygen_WOA_clim],
-	[salinity_WOA_clim],
-	[conductivity_WOA_clim],
-	[sea_water_temp_WOA_clim],
-	[nitrate_WOA_clim],
-	[phosphate_WOA_clim],
-	[silicate_WOA_clim]) 
+-- INCLUDE ([AOU_WOA_clim],
+-- 	[density_WOA_clim],
+-- 	[o2sat_WOA_clim],
+-- 	[oxygen_WOA_clim],
+-- 	[salinity_WOA_clim],
+-- 	[conductivity_WOA_clim],
+-- 	[sea_water_temp_WOA_clim],
+-- 	[nitrate_WOA_clim],
+-- 	[phosphate_WOA_clim],
+-- 	[silicate_WOA_clim]) 
 	WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) 
 	ON [PRIMARY]
 GO

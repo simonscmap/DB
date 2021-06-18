@@ -30,6 +30,8 @@ GO
 
 
 
+ALTER TABLE tblDatasets
+ADD CONSTRAINT unique_dataset_name UNIQUE (dataset_name);
 
 
 -- indices
