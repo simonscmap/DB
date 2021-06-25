@@ -37,13 +37,11 @@ USE [Opedia]
 GO
 
 
-CREATE UNIQUE CLUSTERED INDEX [IX_tblPisces_Forecast_time_lat_lon_hour] ON [dbo].[tblPisces_Forecast]
+CREATE UNIQUE CLUSTERED INDEX [IX_tblPisces_Forecast_time_lat_lon] ON [dbo].[tblPisces_Forecast]
 (
 	[time] ASC,
 	[lat] ASC,
-	[lon] ASC,
-	[hour] ASC
-)
+	[lon] ASC)
  WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [FG3]
 GO
 
