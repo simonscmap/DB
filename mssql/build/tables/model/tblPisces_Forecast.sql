@@ -37,7 +37,7 @@ USE [Opedia]
 GO
 
 
-CREATE UNIQUE CLUSTERED INDEX [IX_tblPisces_Forecast_time_lat_lon] ON [dbo].[tblPisces_Forecast]
+CREATE UNIQUE CLUSTERED INDEX [IX_tblPisces_Forecast_time_lat_lon_depth] ON [dbo].[tblPisces_Forecast]
 (
 	[time] ASC,
 	[lat] ASC,
