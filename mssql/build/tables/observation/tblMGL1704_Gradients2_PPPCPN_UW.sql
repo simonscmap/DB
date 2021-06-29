@@ -9,15 +9,15 @@
 
     CREATE TABLE [dbo].[tblMGL1704_Gradients2_PPPCPN_UW](
 
-      [time]  [datetime]  NOT NULL,
-   [lat]     [float]  NOT NULL,
-   [lon]     [float]  NOT NULL,
- [depth]       [int]  NOT NULL,
-   [sst]     [float]      NULL,
-   [sss]     [float]      NULL,
-    [pp]     [float]      NULL,
-    [pc]     [float]      NULL,
-    [pn]     [float]       NULL
+     [time] [datetime] NOT NULL,
+  [lat]    [float] NOT NULL,
+  [lon]    [float] NOT NULL,
+[depth]      [int] NOT NULL,
+  [sst]    [float]     NULL,
+  [sss]    [float]     NULL,
+   [pp]    [float]     NULL,
+   [pc]    [float]     NULL,
+   [pn]    [float]      NULL
 
 
     ) ON [Primary]
