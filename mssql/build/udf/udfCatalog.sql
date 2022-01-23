@@ -1,7 +1,3 @@
-USE [Opedia]
-GO
-
-
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -40,10 +36,11 @@ SELECT RTRIM(LTRIM(Short_Name)) AS Variable,
    CAST(JSON_VALUE(JSON_stats,'$."'+[Short_Name]+'".max') AS float) AS [Variable_Max],
    RTRIM(LTRIM(Comment)) AS [Comment],
    RTRIM(LTRIM(Dataset_Long_Name)) AS [Dataset_Name],
+   RTRIM(LTRIM(Dataset_Name)) AS [Dataset_Short_Name],
    RTRIM(LTRIM([Data_Source])) AS [Data_Source],
    RTRIM(LTRIM(Distributor)) AS [Distributor],
    RTRIM(LTRIM([Description])) AS [Dataset_Description],
-   RTRIM(LTRIM([Acknowledgement])) AS [Acknowledgement],
+   RTRIM(LTRIM([Acknowledgement])) AS [Acknowledgement],   
    [tblVariables].Dataset_ID AS [Dataset_ID],
    [tblVariables].ID AS [ID],
    [tblVariables].Visualize AS [Visualize],
@@ -61,3 +58,6 @@ SELECT RTRIM(LTRIM(Short_Name)) AS Variable,
    JOIN tblKeywords key_table ON [var_table].ID = [key_table].var_ID GROUP BY var_ID)
    AS keywords_agg ON [keywords_agg].var_ID = [tblVariables].ID
 )
+
+
+GO
