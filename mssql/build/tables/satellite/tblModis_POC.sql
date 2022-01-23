@@ -1,0 +1,82 @@
+USE [Opedia]
+GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[tblModis_POC](
+    [time] [date] NOT NULL,
+	[lat] [float] NOT NULL,
+	[lon] [float] NOT NULL,
+	[POC] [float] NULL,
+    [year] [smallint]      NULL,
+    [month] [tinyint]      NULL,
+    [week] [tinyint]      NULL,
+    [dayofyear] [smallint]       NULL    
+) ON [FG3]
+GO
+
+
+-- indices
+USE [Opedia]
+GO
+
+CREATE UNIQUE NONCLUSTERED INDEX [IX_tblModis_POC_time_lat_lon] ON [dbo].[tblModis_POC]
+(
+	[time] ASC,
+	[lat] ASC,
+	[lon] ASC
+)
+INCLUDE ([POC]) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [FG3]
+GO
+
+
+
+
+
+CREATE NONCLUSTERED INDEX [IX_tblModis_POC_dayofyear_lat_lon] ON [dbo].[tblModis_POC]
+(
+	[dayofyear] ASC,
+	[lat] ASC,
+	[lon] ASC
+)
+INCLUDE([POC]) 
+WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) 
+ON [FG3]
+
+
+CREATE NONCLUSTERED INDEX [IX_tblModis_POC_week_lat_lon] ON [dbo].[tblModis_POC]
+(
+	[week] ASC,
+	[lat] ASC,
+	[lon] ASC
+)
+INCLUDE([POC]) 
+WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) 
+ON [FG3]
+
+
+CREATE NONCLUSTERED INDEX [IX_tblModis_POC_month_lat_lon] ON [dbo].[tblModis_POC]
+(
+	[month] ASC,
+	[lat] ASC,
+	[lon] ASC
+)
+INCLUDE([POC]) 
+WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) 
+ON [FG3]
+
+
+
+CREATE NONCLUSTERED INDEX [IX_tblModis_POC_year_lat_lon] ON [dbo].[tblModis_POC]
+(
+	[year] ASC,
+	[lat] ASC,
+	[lon] ASC
+)
+INCLUDE([POC]) 
+WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) 
+ON [FG3]
