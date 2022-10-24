@@ -1,7 +1,3 @@
-USE [Opedia]
-GO
-
-
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -44,7 +40,7 @@ SELECT RTRIM(LTRIM(Short_Name)) AS Variable,
    RTRIM(LTRIM([Data_Source])) AS [Data_Source],
    RTRIM(LTRIM(Distributor)) AS [Distributor],
    RTRIM(LTRIM([Description])) AS [Dataset_Description],
-   RTRIM(LTRIM([Acknowledgement])) AS [Acknowledgement],
+   RTRIM(LTRIM([Acknowledgement])) AS [Acknowledgement],   
    [tblVariables].Dataset_ID AS [Dataset_ID],
    [tblVariables].ID AS [ID],
    [tblVariables].Visualize AS [Visualize],
@@ -70,3 +66,6 @@ SELECT RTRIM(LTRIM(Short_Name)) AS Variable,
    JOIN tblVariables_JSON_Metadata meta_table ON [var_meta_table].ID = [meta_table].Var_ID GROUP BY Var_ID)
    AS Variable_Metadata ON [Variable_Metadata].Var_ID = [tblVariables].ID
 )
+
+
+GO

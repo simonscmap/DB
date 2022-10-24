@@ -1,13 +1,9 @@
-USE Opedia
-GO
-
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-
-ALTER PROC [dbo].[uspAddAncillary] @tableName NVARCHAR(MAX),
+CREATE PROC [dbo].[uspAddAncillary] @tableName NVARCHAR(MAX),
 			@dt1 NVARCHAR(MAX) = '', @dt2 NVARCHAR(MAX) = '', 
 			@lat1 NVARCHAR(MAX) = '', @lat2 NVARCHAR(MAX) = '', 
 			@lon1 NVARCHAR(MAX) = '', @lon2 NVARCHAR(MAX) = '', 
@@ -72,7 +68,6 @@ BEGIN
 	AND len(@depth1) > 0  -- and subset was made
 
 	BEGIN
-	PRINT 'Depth and filter'
 	SET @query = N'select t1.*, ' + @ancillaryCols + ' from dbo.' + @tableName +' t1 
 		left join ' + @ancillaryTbl + ' t2  
 		on t1.[time]=t2.[time]
@@ -95,7 +90,6 @@ BEGIN
 	AND len(@depth1) > 0 
 
 	BEGIN 
-	PRINT 'Just filter'
 	SET @query = N'select t1.*, ' + @ancillaryCols + ' from dbo.' + @tableName +' t1 
 		left join ' + @ancillaryTbl + ' t2  
 		on t1.[time]=t2.[time]
@@ -111,7 +105,6 @@ BEGIN
 	IF len(@depth1) = 0 -- if no subset was made
 
 	BEGIN 
-	PRINT 'No filter'
 	SET @query = N'select t1.*, ' + @ancillaryCols + ' from dbo.' + @tableName +' t1 
 		left join ' + @ancillaryTbl + ' t2  
 		on t1.[time]=t2.[time]
