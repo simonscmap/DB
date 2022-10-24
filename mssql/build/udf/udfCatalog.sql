@@ -40,6 +40,7 @@ SELECT RTRIM(LTRIM(Short_Name)) AS Variable,
    CAST(JSON_VALUE(JSON_stats,'$."'+[Short_Name]+'".max') AS float) AS [Variable_Max],
    RTRIM(LTRIM(Comment)) AS [Comment],
    RTRIM(LTRIM(Dataset_Long_Name)) AS [Dataset_Name],
+   RTRIM(LTRIM(Dataset_Name)) AS [Dataset_Short_Name],
    RTRIM(LTRIM([Data_Source])) AS [Data_Source],
    RTRIM(LTRIM(Distributor)) AS [Distributor],
    RTRIM(LTRIM([Description])) AS [Dataset_Description],
@@ -47,7 +48,9 @@ SELECT RTRIM(LTRIM(Short_Name)) AS Variable,
    [tblVariables].Dataset_ID AS [Dataset_ID],
    [tblVariables].ID AS [ID],
    [tblVariables].Visualize AS [Visualize],
-   [keywords_agg].Keywords AS [Keywords]
+   [keywords_agg].Keywords AS [Keywords],
+   [Dataset_Metadata].Unstructured_Dataset_Metadata as [Unstructured_Dataset_Metadata],
+   [Variable_Metadata].Unstructured_Variable_Metadata as [Unstructured_Variable_Metadata]
    FROM tblVariables
    JOIN tblDataset_Stats ON [tblVariables].Dataset_ID = [tblDataset_Stats].Dataset_ID
    JOIN tblDatasets ON [tblVariables].Dataset_ID=[tblDatasets].ID
@@ -57,7 +60,13 @@ SELECT RTRIM(LTRIM(Short_Name)) AS Variable,
    JOIN tblSensors ON [tblVariables].Sensor_ID=[tblSensors].ID
    JOIN tblProcess_Stages ON [tblVariables].Process_ID=[tblProcess_Stages].ID
    JOIN tblStudy_Domains ON [tblVariables].Study_Domain_ID=[tblStudy_Domains].ID
-   JOIN (SELECT var_ID, STRING_AGG (keywords, ', ') AS Keywords FROM tblVariables var_table
+   JOIN (SELECT var_ID, STRING_AGG (CAST(keywords as NVARCHAR(MAX)), ', ') AS Keywords FROM tblVariables var_table
    JOIN tblKeywords key_table ON [var_table].ID = [key_table].var_ID GROUP BY var_ID)
    AS keywords_agg ON [keywords_agg].var_ID = [tblVariables].ID
+   LEFT JOIN (SELECT Dataset_ID, STRING_AGG (CAST(JSON_Metadata as NVARCHAR(MAX)), ', ') AS Unstructured_Dataset_Metadata FROM tblDatasets dataset_table
+   JOIN tblDatasets_JSON_Metadata meta_table ON [dataset_table].ID = [meta_table].Dataset_ID GROUP BY Dataset_ID)
+   AS Dataset_Metadata ON [Dataset_Metadata].Dataset_ID = [tblDatasets].ID
+   LEFT JOIN (SELECT Var_ID, STRING_AGG (CAST(JSON_Metadata as NVARCHAR(MAX)), ', ') AS Unstructured_Variable_Metadata FROM tblVariables var_meta_table
+   JOIN tblVariables_JSON_Metadata meta_table ON [var_meta_table].ID = [meta_table].Var_ID GROUP BY Var_ID)
+   AS Variable_Metadata ON [Variable_Metadata].Var_ID = [tblVariables].ID
 )

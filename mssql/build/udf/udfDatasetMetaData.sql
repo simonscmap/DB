@@ -14,7 +14,7 @@ AS
 RETURN (
     SELECT cat.*, ref.Refrences FROM dbo.udfCatalog() AS cat
 	JOIN (
-          SELECT Dataset_ID, STRING_AGG (Reference, ', [Next Citation]:  ') AS Refrences 
+          SELECT Dataset_ID, STRING_AGG (CAST(Reference as NVARCHAR(MAX)), ', [Next Citation]:  ') AS Refrences 
           FROM tblDataset_References ref GROUP BY Dataset_ID
          ) AS ref ON ref.Dataset_ID = cat.Dataset_ID
 WHERE cat.Table_Name=RTRIM(LTRIM(@tableName)))
