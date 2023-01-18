@@ -1,6 +1,6 @@
 USE [Opedia]
 GO
-
+/****** Object:  StoredProcedure [dbo].[uspTimeSeries]    Script Date: 1/17/2023 3:05:28 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -9,11 +9,12 @@ GO
 
 
 
-CREATE PROC [dbo].[uspTimeSeries] @tableName NVARCHAR(MAX), @field NVARCHAR(MAX), 
+ALTER PROC [dbo].[uspTimeSeries] @tableName NVARCHAR(MAX), @field NVARCHAR(MAX), 
 								 @dt1 NVARCHAR(MAX), @dt2 NVARCHAR(MAX), 
 								 @lat1 NVARCHAR(MAX), @lat2 NVARCHAR(MAX), 
 								 @lon1 NVARCHAR(MAX), @lon2 NVARCHAR(MAX), 
-								 @depth1 NVARCHAR(MAX), @depth2 NVARCHAR(MAX)
+								 @depth1 NVARCHAR(MAX), @depth2 NVARCHAR(MAX),
+								 @onlyStatement AS nchar(1) = '0'
 --WITH RECOMPILE 
 AS
 BEGIN
@@ -58,7 +59,7 @@ BEGIN
 
 	DECLARE @timeField AS NVARCHAR(50)
 	SET @timeField = '[time]'
-	IF @tableName LIKE '%_Climatology'			-- if table represents a climatology data set
+	IF @tableName LIKE '%_Climatology]'			-- if table represents a climatology data set
 	BEGIN
 		IF COL_LENGTH(RTRIM(LTRIM(@tableName)), 'month') IS NOT NULL	-- if table has month field
 		BEGIN
@@ -91,5 +92,13 @@ BEGIN
 	END
 	-------------------------------------------------
 
-	EXEC(@query)
+	IF @onlyStatement = '1'
+	BEGIN
+		DECLARE @statement AS NVARCHAR(MAX) = 'select ' + '''' + REPLACE(@query, '''', '''''') + '''' + ' as query';
+		EXEC(@statement)
+	END
+	ELSE
+	BEGIN
+		EXEC(@query)
+	END
 END
