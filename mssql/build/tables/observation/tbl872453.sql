@@ -1,0 +1,107 @@
+
+USE [Opedia]
+
+SET ANSI_NULLS ON
+
+
+SET QUOTED_IDENTIFIER ON
+
+CREATE TABLE [dbo].[tbl872453](
+
+	[time] [datetime] NOT NULL, 
+	[lat] [float] NOT NULL, 
+	[lon] [float] NOT NULL, 
+	[depth] [float] NOT NULL, 
+	[NCD_a24809A06_nifH_gene] [float] NULL, 
+	[NCD_aETSP1_nifH_gene] [float] NULL, 
+	[NCD_Alpha_MH144511_nifH_gene] [float] NULL, 
+	[NCD_BAL398_nifH_gene] [float] NULL, 
+	[NCD_BT5667A01_nifH_gene] [float] NULL, 
+	[NCD_CB914H4_nifH_gene] [float] NULL, 
+	[NCD_CE1_45m_12_a_nifH_gene] [float] NULL, 
+	[NCD_OTU0014_Brady_nifH_gene] [float] NULL, 
+	[NCD_alpha1_nifH_gene] [float] NULL, 
+	[NCD_alpha2_nifH_gene] [float] NULL, 
+	[NCD_EVHVF_nifH_gene] [float] NULL, 
+	[NCD_M6411A02_nifH_gene] [float] NULL, 
+	[NCD_PlanctH08_nifH_gene] [float] NULL, 
+	[NCD_PlanctH09_nifH_gene] [float] NULL, 
+	[NCD_Cluster_III_C_nifH_gene] [float] NULL, 
+	[NCD_Cluster_III_L_nifH_gene] [float] NULL, 
+	[NCD_CB907H22_nifH_gene] [float] NULL, 
+	[NCD_cIII_ETSP_nifH_gene] [float] NULL, 
+	[NCD_Cluster_3_nifH_gene] [float] NULL, 
+	[NCD_M6413A02_nifH_gene] [float] NULL, 
+	[NCD_P4_nifH_gene] [float] NULL, 
+	[NCD_D0CY3_nifH_gene] [float] NULL, 
+	[NCD_ECI27_nifH_gene] [float] NULL, 
+	[NCD_AT2LU_nifH_gene] [float] NULL, 
+	[NCD_Arc_nifH_gene] [float] NULL, 
+	[NCD_P6_nifH_gene] [float] NULL, 
+	[NCD_g24774A11_nifH_gene] [float] NULL, 
+	[NCD_gammaA_nifH_gene] [float] NULL, 
+	[NCD_AO15_nifH_gene] [float] NULL, 
+	[NCD_BAL354_nifH_gene] [float] NULL, 
+	[NCD_Azo_nifH_gene] [float] NULL, 
+	[NCD_BAL281_nifH_gene] [float] NULL, 
+	[NCD_BT19215A01_nifH_gene] [float] NULL, 
+	[NCD_CE2_5m_1_g_nifH_gene] [float] NULL, 
+	[NCD_EP19212A1_nifH_gene] [float] NULL, 
+	[NCD_ETSP1_nifH_gene] [float] NULL, 
+	[NCD_ETSP2_nifH_gene] [float] NULL, 
+	[NCD_ETSP3_nifH_gene] [float] NULL, 
+	[NCD_Gamma_1_nifH_gene] [float] NULL, 
+	[NCD_Gamma_2_nifH_gene] [float] NULL, 
+	[NCD_Gamma_3_nifH_gene] [float] NULL, 
+	[NCD_Gamma_4_nifH_gene] [float] NULL, 
+	[NCD_Gamma_P_nifH_gene] [float] NULL, 
+	[NCD_M6433A04_nifH_gene] [float] NULL, 
+	[NCD_EQF91_nifH_gene] [float] NULL, 
+	[NCD_ALHOU_nifH_gene] [float] NULL, 
+	[NCD_Vib_nifH_gene] [float] NULL, 
+	[NCD_OcSpi_nifH_gene] [float] NULL, 
+	[NCD_P8_nifH_gene] [float] NULL, 
+	[NCD_OTU0001_Pseudo_nifH_gene] [float] NULL, 
+	[NCD_OTU0009_Kleb_nifH_gene] [float] NULL, 
+	[NCD_P3_nifH_gene] [float] NULL, 
+	[NCD_P7_nifH_gene] [float] NULL, 
+	[NCD_P1_nifH_gene] [float] NULL, 
+	[NCD_P2_nifH_gene] [float] NULL, 
+	[NCD_Alpha_MH144511_nifH_transcript] [float] NULL, 
+	[NCD_BT5667A01_nifH_transcript] [float] NULL, 
+	[NCD_OTU0014_Brady_nifH_transcript] [float] NULL, 
+	[NCD_EVHVF_nifH_transcript] [float] NULL, 
+	[NCD_Cluster_III_L_nifH_transcript] [float] NULL, 
+	[NCD_D0CY3_nifH_transcript] [float] NULL, 
+	[NCD_ECI27_nifH_transcript] [float] NULL, 
+	[NCD_AT2LU_nifH_transcript] [float] NULL, 
+	[NCD_Arc_nifH_transcript] [float] NULL, 
+	[NCD_g24774A11_nifH_transcript] [float] NULL, 
+	[NCD_gammaA_nifH_transcript] [float] NULL, 
+	[NCD_AO15_nifH_transcript] [float] NULL, 
+	[NCD_Azo_nifH_transcript] [float] NULL, 
+	[NCD_ETSP2_nifH_transcript] [float] NULL, 
+	[NCD_Gamma_1_nifH_transcript] [float] NULL, 
+	[NCD_Gamma_2_nifH_transcript] [float] NULL, 
+	[NCD_Gamma_3_nifH_transcript] [float] NULL, 
+	[NCD_Gamma_4_nifH_transcript] [float] NULL, 
+	[NCD_EQF91_nifH_transcript] [float] NULL, 
+	[NCD_ALHOU_nifH_transcript] [float] NULL, 
+	[NCD_Vib_nifH_transcript] [float] NULL, 
+	[NCD_OTU0001_Pseudo_nifH_transcript] [float] NULL, 
+	[NCD_OTU0009_Kleb_nifH_transcript] [float] NULL, 
+	[source_data] [nvarchar](380) NULL, 
+	[source_location_of_data] [nvarchar](100) NULL, 
+	[notes] [nvarchar](250) NULL
+
+) ON [FG3]
+
+
+
+CREATE NONCLUSTERED INDEX [IX_tbl872453_time_lat_lon_depth] ON [dbo].[tbl872453]
+(
+    [time] ASC,
+    [lat] ASC,
+    [lon] ASC,
+    [depth]
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [FG3]

@@ -7,14 +7,14 @@
     SET QUOTED_IDENTIFIER ON
 
 
-    CREATE TABLE [dbo].[tblHOE_legacy_3](
+    CREATE TABLE [dbo].[tblHOE_Legacy_4](
 
                      [time] [datetime] NOT NULL,
                   [lat]    [float] NOT NULL,
                   [lon]    [float] NOT NULL,
                 [depth]    [float] NOT NULL,
               [Station]      [int]     NULL,
-                 [Cast]    [float]     NULL,
+                 [Cast]      [int]     NULL,
                [RosPos]      [int]     NULL,
       [CTD_Temperature]    [float]     NULL,
          [CTD_Salinity]    [float]     NULL,
@@ -37,7 +37,7 @@
     USE [Opedia]
 
 
-    CREATE UNIQUE NONCLUSTERED INDEX [IX_tblHOE_legacy_3_time_lat_lon_depth] ON [dbo].[tblHOE_legacy_3]
+    CREATE UNIQUE NONCLUSTERED INDEX [IX_tblHOE_Legacy_4_time_lat_lon_depth] ON [dbo].[tblHOE_Legacy_4]
     (
     	[time] ASC,
     	[lat] ASC,

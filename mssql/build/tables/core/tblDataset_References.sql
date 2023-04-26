@@ -8,19 +8,16 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE TABLE [dbo].[tblDataset_References](
+	[Reference_ID] [int] NOT NULL,
 	[Dataset_ID] [int] NOT NULL,
-	[Reference] [nvarchar](500) NOT NULL
+	[Reference] [nvarchar](700) NOT NULL,
+	[Data_DOI] [bit] NOT NULL
+	 CONSTRAINT [PK_tblDataset_References] PRIMARY KEY CLUSTERED
+(
+	[Reference_ID] ASC
+)
 ) ON [PRIMARY]
 GO
-
-ALTER TABLE [dbo].[tblDataset_References]  WITH CHECK ADD  CONSTRAINT [FK_tblDataset_References_tblDatasets] FOREIGN KEY([Dataset_ID])
-REFERENCES [dbo].[tblDatasets] ([ID])
-GO
-
-ALTER TABLE [dbo].[tblDataset_References] CHECK CONSTRAINT [FK_tblDataset_References_tblDatasets]
-GO
-
-
 
 
 

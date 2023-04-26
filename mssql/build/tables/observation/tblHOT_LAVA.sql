@@ -7,14 +7,14 @@
     SET QUOTED_IDENTIFIER ON
 
 
-    CREATE TABLE [dbo].[tblHOE_legacy_2A](
+    CREATE TABLE [dbo].[tblHOT_LAVA](
 
                       [time] [datetime] NOT NULL,
                    [lat]    [float] NOT NULL,
                    [lon]    [float] NOT NULL,
                  [depth]    [float] NOT NULL,
                [Station]      [int]     NULL,
-                  [Cast]    [float]     NULL,
+                  [Cast]      [int]     NULL,
                 [RosPos]      [int]     NULL,
        [CTD_Temperature]    [float]     NULL,
           [CTD_Salinity]    [float]     NULL,
@@ -25,12 +25,14 @@
          [Bottle_Oxygen]    [float]     NULL,
                    [DIC]    [float]     NULL,
             [Alkalinity]    [float]     NULL,
+                    [pH]    [float]     NULL,
                    [PO4]    [float]     NULL,
                [NO3_NO2]    [float]     NULL,
                   [SiO4]    [float]     NULL,
-                   [LLN]    [float]     NULL,
                     [PC]    [float]     NULL,
                     [PN]    [float]     NULL,
+                    [PP]    [float]     NULL,
+                   [Psi]    [float]     NULL,
            [Chlorophyll]    [float]     NULL,
           [Phaeopigment]    [float]     NULL,
 [Heterotrophic_Bacteria]    [float]     NULL,
@@ -43,7 +45,7 @@
     USE [Opedia]
 
 
-    CREATE UNIQUE NONCLUSTERED INDEX [IX_tblHOE_legacy_2A_time_lat_lon_depth] ON [dbo].[tblHOE_legacy_2A]
+    CREATE UNIQUE NONCLUSTERED INDEX [IX_tblHOT_LAVA_time_lat_lon_depth] ON [dbo].[tblHOT_LAVA]
     (
     	[time] ASC,
     	[lat] ASC,
