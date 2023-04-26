@@ -1,6 +1,6 @@
 USE [Opedia]
 GO
-
+/****** Object:  StoredProcedure [dbo].[uspSpaceTime]    Script Date: 1/17/2023 3:01:10 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -9,11 +9,12 @@ GO
 
 
 
-CREATE PROC [dbo].[uspSpaceTime] @tableName NVARCHAR(MAX), @field NVARCHAR(MAX), 
+ALTER PROC [dbo].[uspSpaceTime] @tableName NVARCHAR(MAX), @field NVARCHAR(MAX), 
 								 @dt1 NVARCHAR(MAX), @dt2 NVARCHAR(MAX), 
 								 @lat1 NVARCHAR(MAX), @lat2 NVARCHAR(MAX), 
 								 @lon1 NVARCHAR(MAX), @lon2 NVARCHAR(MAX), 
-								 @depth1 NVARCHAR(MAX), @depth2 NVARCHAR(MAX)
+								 @depth1 NVARCHAR(MAX), @depth2 NVARCHAR(MAX),
+								 @onlyStatement AS nchar(1) = '0'
 --WITH RECOMPILE 
 AS
 BEGIN
@@ -108,5 +109,13 @@ BEGIN
 
 	-------------------------------------------------
 	
-	EXEC(@query)
+	IF @onlyStatement = '1'
+	BEGIN
+		DECLARE @statement AS NVARCHAR(MAX) = 'select ' + '''' + REPLACE(@query, '''', '''''') + '''' + ' as query';
+		EXEC(@statement)
+	END
+	ELSE
+	BEGIN
+		EXEC(@query)
+	END
 END
