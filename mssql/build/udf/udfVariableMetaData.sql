@@ -56,6 +56,8 @@ RETURN (
     Dataset_ID = CASE WHEN Row_Number = 1 THEN Dataset_ID ELSE NULL END,
     ID = CASE WHEN Row_Number = 1 THEN ID ELSE NULL END,
     Keywords = CASE WHEN Row_Number = 1 THEN Keywords ELSE NULL END,
-    Reference
+    Reference,
+	Unstructured_Dataset_Metadata = CASE WHEN Row_Number = 1 THEN Unstructured_Dataset_Metadata ELSE NULL END,
+	Unstructured_Variable_Metadata = CASE WHEN Row_Number = 1 THEN Unstructured_Variable_Metadata ELSE NULL END
     FROM CTE
 )
