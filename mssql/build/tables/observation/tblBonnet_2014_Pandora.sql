@@ -13,24 +13,24 @@
                            [lat]    [float] NOT NULL,
                            [lon]    [float] NOT NULL,
                          [depth]      [int] NOT NULL,
-      [ucyn_a1_nifh_genes_small]    [float]     NULL,
-      [ucyn_a1_nifh_genes_large]    [float]     NULL,
-   [ucyn_a2_a3_nifh_genes_small]    [float]     NULL,
-   [ucyn_a2_a3_nifh_genes_large]    [float]     NULL,
-       [ucyn_b_nifh_genes_small]    [float]     NULL,
-       [ucyn_b_nifh_genes_large]    [float]     NULL,
-       [ucyn_c_nifh_genes_small]    [float]     NULL,
-[trichodesmium_nifh_genes_small]    [float]     NULL,
-[trichodesmium_nifh_genes_large]    [float]     NULL,
-        [het_1_nifh_genes_small]    [float]     NULL,
-        [het_1_nifh_genes_large]    [float]     NULL,
-        [het_2_nifh_genes_small]    [float]     NULL,
-        [het_2_nifh_genes_large]    [float]     NULL,
-      [gamma_a_nifh_genes_small]    [float]     NULL,
-      [gamma_a_nifh_genes_large]    [float]      NULL
+      [UCYN_A1_nifH_genes_small]    [float]     NULL,
+      [UCYN_A1_nifH_genes_large]    [float]     NULL,
+   [UCYN_A2_A3_nifH_genes_small]    [float]     NULL,
+   [UCYN_A2_A3_nifH_genes_large]    [float]     NULL,
+       [UCYN_B_nifH_genes_small]    [float]     NULL,
+       [UCYN_B_nifH_genes_large]    [float]     NULL,
+       [UCYN_C_nifH_genes_small]    [float]     NULL,
+[Trichodesmium_nifH_genes_small]    [float]     NULL,
+[Trichodesmium_nifH_genes_large]    [float]     NULL,
+        [Het_1_nifH_genes_small]    [float]     NULL,
+        [Het_1_nifH_genes_large]    [float]     NULL,
+        [Het_2_nifH_genes_small]    [float]     NULL,
+        [Het_2_nifH_genes_large]    [float]     NULL,
+      [Gamma_A_nifH_genes_small]    [float]     NULL,
+      [Gamma_A_nifH_genes_large]    [float]      NULL
 
 
-    ) ON [FG4]
+    ) ON [FG3]
     USE [Opedia]
 
 
@@ -40,4 +40,4 @@
     	[lat] ASC,
     	[lon] ASC,
     	[depth]
-    )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [FG4]
+    )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [FG3]
